@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [AccueilController::class, 'index'])->name('accueil');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });

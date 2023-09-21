@@ -19,11 +19,11 @@ return new class extends Migration
 
             $table->integer('numero');
             $table->date('date');
-            $table->dateTime('heure');
+            $table->integer('heure');
             $table->integer('prix');
             $table->integer('place');
-            $table->foreignIdFor(Salle::class)->constrained();
-            $table->foreignIdFor(Client::class)->constrained();
+            //$table->foreignIdFor(Salle::class)->constrained();
+            //$table->foreignIdFor(Client::class)->constrained();
 
         });
     }

@@ -20,12 +20,12 @@ class ReservationFactory extends Factory
     {
         return [
             'numero'=> $this->faker->numberBetween(1, 100),
-            'date'=> $this->faker->dateTime(),
-            'heure'=> $this->faker->time(),
+            'date'=> $this->faker->date(),
+            'heure'=> $this->faker->numberBetween(0, 24),
             'prix'=> $this->faker->numberBetween(70, 150),
             'place'=> $this->faker->numberBetween(30, 50),
-            'salle_id' => Salle::factory()->create(),
-            'client_id' => Client::factory()->create(),
+            //'salle_id' => Salle::factory()->create(),
+            //'client_id' => Client::factory()->create(),
         ];
     }
 }
