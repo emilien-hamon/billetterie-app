@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Salle;
+use App\Models\Client;
 
 return new class extends Migration
 {
@@ -15,9 +17,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->numero();
-            $table->date();
-            $table->heure();
+            $table->integer('numero');
+            $table->date('date');
+            $table->dateTime('heure');
+            $table->integer('prix');
+            $table->integer('place');
+            $table->foreignIdFor(Salle::class)->constrained();
+            $table->foreignIdFor(Client::class)->constrained();
+
         });
     }
 

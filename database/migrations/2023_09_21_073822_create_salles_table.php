@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->nom();
-            $table->adresse();
-            $table->place();
+            $table->string('nom');
+            $table->string('adresse');
+            $table->string('place');
 
         });
     }
