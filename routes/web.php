@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccueilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AccueilController::class, 'index'])->name('accueil');
 
-Route::get('/', function () {
-    return view('accueil');
+Route::get('accueil', function () {
+
+    $salle = DB::table('salles')->get();
+
+    return view('accueil', ['salle' => $salle]);
 });
+
