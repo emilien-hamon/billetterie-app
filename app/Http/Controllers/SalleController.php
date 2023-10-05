@@ -14,7 +14,7 @@ class SalleController extends Controller
     {
         $salle = Salle::all();
 
-        return view('accueil', compact('salle'));
+        return view('salle', compact('salle'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accueil;
 use Illuminate\Http\Request;
+use App\Models\Salle;
 
 class AccueilController extends Controller
 {
@@ -12,7 +13,8 @@ class AccueilController extends Controller
      */
     public function index()
     {
-        return view('accueil');
+        $salle = Salle::all();
+        return view('accueil', compact('salle'));
     }
 
     /**

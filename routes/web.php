@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SalleController;
+use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\ClientController;
 use App\Models\Salle;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route::view('/', 'accueil');
-Route::get('/', [SalleController::class, 'index']);
+Route::get('/', [AccueilController::class, 'index']);
 
 Route::resource('salle', SalleController::class);
+
+Route::resource('client', ClientController::class);
 
