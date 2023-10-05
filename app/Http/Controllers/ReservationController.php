@@ -14,7 +14,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::all();
 
-        return view('reservation', compact('reservation'));
+        return view('reservation.reservation', compact('reservation'));
     }
 
     /**

@@ -14,7 +14,7 @@ class ClientController extends Controller
     {
         $client = Client::all();
 
-        return view('client', compact('client'));
+        return view('client.client', compact('client'));
     }
 
     /**
@@ -54,7 +54,9 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $this->repository->update($client, $request->all());
+
+        return redirect()->route('client.index');
     }
 
     /**

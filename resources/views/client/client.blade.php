@@ -18,5 +18,6 @@
         <li>Email :{{$clients->email}}</li>
     </ul>
     @endforeach
+    <a href="{{ route('client.edit', ['client' => $client->id]) }}">Modifier</a>
 </body>
 </html>
