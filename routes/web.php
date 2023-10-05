@@ -3,6 +3,7 @@
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReservationController;
 use App\Models\Salle;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,6 @@ Route::get('/', [AccueilController::class, 'index']);
 Route::resource('salle', SalleController::class);
 
 Route::resource('client', ClientController::class);
+
+Route::resource('reservation', ReservationController::class);
 

@@ -7,12 +7,15 @@
     <title>Client</title>
 </head>
 <body>
+    <a href="salle">Liste des salle</a>
+    <a href="reservation">Reservations</a>
+    <a href="http://billetterie.test">Accueil</a>
     <h2>Liste des clients :</h2>
     @foreach ($client as $clients)
     <ul>
-        <li>Nom de la salle :{{$clients->nom}}</li>
-        <li>Adresse :{{$clients->prenom}}</li>
-        <li>Nombre de place :{{$clients->email}}</li>
+        <li>Nom :{{$clients->nom}}</li>
+        <li>Prenom :{{$clients->prenom}}</li>
+        <li>Email :{{$clients->email}}</li>
     </ul>
     @endforeach
 </body>

@@ -7,6 +7,9 @@
     <title>Salle</title>
 </head>
 <body>
+    <a href="client">Liste des clients</a>
+    <a href="reservation">Reservations</a>
+    <a href="http://billetterie.test">Accueil</a>
     <h2>Liste des salles :</h2>
     @foreach ($salle as $salles)
     <ul>
