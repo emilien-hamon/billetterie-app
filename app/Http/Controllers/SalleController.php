@@ -12,7 +12,9 @@ class SalleController extends Controller
      */
     public function index()
     {
-        //
+        $salle = Salle::all();
+
+        return view('accueil', compact('salle'));
     }
 
     /**

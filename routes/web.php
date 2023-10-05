@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\SalleController;
+use App\Models\Salle;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccueilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,8 @@ use App\Http\Controllers\AccueilController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::view('/', 'accueil');
+Route::get('/', [SalleController::class, 'index']);
 
-Route::get('/', [AccueilController::class, 'index'])->name('accueil');
-
-Route::get('accueil', function () {
-
-    $salle = DB::table('salles')->get();
-
-    return view('accueil', ['salle' => $salle]);
-});
+Route::resource('salle', SalleController::class);
 

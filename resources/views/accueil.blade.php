@@ -8,13 +8,13 @@
 </head>
 <body>
     <h2>Liste des salles :</h2>
-    @forelse ($salles as $salle)
+    @foreach ($salle as $salles)
     <ul>
-        <li>Nom de la salle :{{$data->nom}}</li>
-        <li>Adresse :{{$data->adresse}}</li>
-        <li>Nombre de place :{{$data->place}}</li>
+        <li>Nom de la salle :{{$salles->nom}}</li>
+        <li>Adresse :{{$salles->adresse}}</li>
+        <li>Nombre de place :{{$salles->place}}</li>
     </ul>
-    @endforelse
+    @endforeach
 
 </body>
 </html>
