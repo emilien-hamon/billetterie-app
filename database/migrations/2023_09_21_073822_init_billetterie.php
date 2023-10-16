@@ -32,6 +32,7 @@ return new class extends Migration
         });
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero');
             $table->foreignIdFor(Client::class,'id_reservation');
             $table->date('date_reservation');
             $table->string('place_reservation');

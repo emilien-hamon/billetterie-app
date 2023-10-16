@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container py-4">
-    <h2 >Création - Client</h2>
-    <form action="{{ route('client.store') }}" method="post">
+    <h2 >Création - Salle</h2>
+    <form action="{{ route('salle.store') }}" method="post">
         @csrf
         @method('post')
 
@@ -13,13 +13,13 @@
         </div>
 
         <div class="form-group">
-            <label for="prenom" class="text-white">Prénom</label>
-            <input type="text" name="prenom" id="prenom" class="form-control" required maxlength="75" placeholder="Prénom">
+            <label for="adresse" class="text-white">Adresse</label>
+            <input type="text" name="adresse" id="adresse" class="form-control" required maxlength="75" placeholder="Adresse">
         </div>
 
         <div class="form-group">
-            <label for="email" class="text-white">Email</label>
-            <input type="email" name="email" id="email" class="form-control" required maxlength="75" placeholder="Email">
+            <label for="place" class="text-white">Place</label>
+            <input type="number" name="place" id="place" class="form-control" required maxlength="75" placeholder="Nombre de place">
         </div>
 
         <div class="mt-4">

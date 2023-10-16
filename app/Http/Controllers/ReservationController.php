@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Reservation;
+use App\Models\Salle;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -12,9 +14,12 @@ class ReservationController extends Controller
      */
     public function index()
     {
+        $client = Client::all();
+        $salle = Salle::all();
         $reservation = Reservation::all();
+        return view('reservation.reservation', compact('reservation','client','salle'));
 
-        return view('reservation.reservation', compact('reservation'));
+
     }
 
     /**
@@ -22,7 +27,10 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        $salle = Salle::all();
+        $client = Client::all();
+
+        return view('reservation.create',compact('client','salle'));
     }
 
     /**
@@ -30,7 +38,18 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservation = new Reservation;
+
+        $reservation->numero = $request->numero;
+        $reservation->id_reservation = $request->id_reservation;
+        $reservation->date_reservation = $request->date_reservation;
+        $reservation->place_reservation = $request->place_reservation;
+        $reservation->prix = $request->prix;
+        $reservation->salle_id = $request->salle_id;
+
+        $reservation->save();
+
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -38,7 +57,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        return view('reservation.show', compact('reservation'));
     }
 
     /**
@@ -46,7 +65,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('reservation.edit', compact('reservation'));
     }
 
     /**
@@ -54,7 +73,16 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $reservation->numero = $request->numero;
+        $reservation->id_reservation = $request->id_reservation;
+        $reservation->date_reservation = $request->date_reservation;
+        $reservation->place_reservation = $request->place_reservation;
+        $reservation->prix = $request->prix;
+        $reservation->salle_id = $request->salle_id;
+
+        $reservation->save();
+
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -62,6 +90,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->route('reservation.index');
     }
 }

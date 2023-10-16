@@ -22,7 +22,7 @@ class SalleController extends Controller
      */
     public function create()
     {
-        //
+        return view('salle.create');
     }
 
     /**
@@ -30,7 +30,15 @@ class SalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $salle = new Salle;
+
+        $salle->nom = $request->nom;
+        $salle->adresse = $request->adresse;
+        $salle->place = $request->place;
+
+        $salle->save();
+
+        return redirect()->route('salle.index');
     }
 
     /**
@@ -38,7 +46,7 @@ class SalleController extends Controller
      */
     public function show(Salle $salle)
     {
-        //
+        return view('salle.show', compact('salle'));
     }
 
     /**
@@ -46,7 +54,7 @@ class SalleController extends Controller
      */
     public function edit(Salle $salle)
     {
-        //
+        return view('salle.edit', compact('salle'));
     }
 
     /**
@@ -54,7 +62,13 @@ class SalleController extends Controller
      */
     public function update(Request $request, Salle $salle)
     {
-        //
+        $salle->nom = $request->nom;
+        $salle->adresse = $request->adresse;
+        $salle->place = $request->place;
+
+        $salle->save();
+
+        return redirect()->route('salle.index');
     }
 
     /**
@@ -62,6 +76,7 @@ class SalleController extends Controller
      */
     public function destroy(Salle $salle)
     {
-        //
+        $salle->delete();
+        return redirect()->route('salle.index');
     }
 }

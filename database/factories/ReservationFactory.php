@@ -21,6 +21,7 @@ class ReservationFactory extends Factory
         $salle = Salle::inRandomOrder()->first();
         $client = Client::inRandomOrder()->first();
         return [
+            'numero'=> $this->faker->unique()->numberBetween(1000, 1999),
             'date_reservation'=> $this->faker->date(),
             'prix'=> $this->faker->numberBetween(70, 150),
             'place_reservation'=> $this->faker->numberBetween(30, 50),

@@ -62,10 +62,8 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Client $client)
     {
-        $client = Client::find($id);
-
         $client->nom = $request->nom;
         $client->prenom = $request->prenom;
         $client->email = $request->email;
