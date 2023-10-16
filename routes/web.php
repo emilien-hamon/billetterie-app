@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\SalleController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
-use App\Models\Salle;
+use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +17,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Route::view('/', 'accueil');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 Route::get('/', [AccueilController::class, 'index']);
 
 Route::resource('salle', SalleController::class);
@@ -26,3 +40,5 @@ Route::resource('client', ClientController::class);
 
 Route::resource('reservation', ReservationController::class);
 
+
+require __DIR__.'/auth.php';
