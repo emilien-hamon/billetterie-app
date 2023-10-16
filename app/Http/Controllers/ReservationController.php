@@ -57,16 +57,20 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        return view('reservation.show', compact('reservation'));
+        $client = Client::all();
+        $salle = Salle::all();
+
+        return view('reservation.show', compact('reservation','client','salle'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservation $reservation)
+    public function edit(String $id)
     {
-        $client = Client::all();
-        $salle = Salle::all();
+        $client = Client::Find($id);
+        $salle = Salle::Find($id);
+        $reservation = Salle::Find($id);
         return view('reservation.edit', compact('reservation','client','salle'));
     }
 

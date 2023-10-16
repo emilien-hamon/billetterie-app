@@ -7,8 +7,9 @@
             <div class="card bg-light shadow">
                 <div class="card-body text-center">
                     <h1 class="card-title">{{$salle->nom}}</h1>
-                    <p class="card-text">{{$salle->adresse}}</p>
-                    <p class="card-text">Capacité : {{$salle->place}} personnes</p>
+                    <p class="card-text">Adresse : {{$salle->adresse}}</p>
+                    <p class="card-text">Nombre de place : {{$salle->place}}</p>
+                    <p class="card-text">Id de la salle : {{$salle->id}}</p>
                 </div>
             </div>
         </div>

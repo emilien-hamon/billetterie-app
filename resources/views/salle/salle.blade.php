@@ -3,12 +3,13 @@
 @section('content')
 <div class="container">
     <h2>Liste des salles :</h2>
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Nom de la salle</th>
                 <th>Adresse</th>
                 <th>Nombre de places</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,23 +19,24 @@
                 <td>{{$salles->adresse}}</td>
                 <td>{{$salles->place}}</td>
                 <td>
-                    <form method="POST" action="{{ route('salle.destroy', ['salle' => $salles->id]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
-                    </form>
-
-                    <a href="{{ route('salle.edit', ['salle' => $salles->id]) }}"
-                        class="btn btn-warning">Modifier</a>
-                        <a href="{{ route('salle.show', ['salle' => $salles->id]) }}"
-                            class="btn btn-warning">Voir</a>
-
+                    <div class="btn-group">
+                        <a href="{{ route('salle.show', ['salle' => $salles->id]) }}" class="btn btn-warning rounded">Voir</a>
+                        <span class="mx-1"></span>
+                        <a href="{{ route('salle.edit', ['salle' => $salles->id]) }}" class="btn btn-warning rounded">Modifier</a>
+                        <span class="mx-1"></span>
+                        <form method="POST" action="{{ route('salle.destroy', ['salle' => $salles->id]) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger rounded delete-user">Supprimer</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
-
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('salle.create') }}" class="btn btn-warning">Créer</a>
+    <div class="text-center">
+        <a href="{{ route('salle.create') }}" class="btn btn-warning">Ajouter une nouvelle salle</a>
+    </div>
 </div>
 @endsection
