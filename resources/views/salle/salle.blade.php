@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Salle</title>
-</head>
-<body>
-    <a href="client">Liste des clients</a>
-    <a href="reservation">Reservations</a>
-    <a href="http://billetterie.test">Accueil</a>
+@extends('layout.header')
+
+@section('content')
+<div class="container">
     <h2>Liste des salles :</h2>
-    @foreach ($salle as $salles)
-    <ul>
-        <li>Nom de la salle :{{$salles->nom}}</li>
-        <li>Adresse :{{$salles->adresse}}</li>
-        <li>Nombre de place :{{$salles->place}}</li>
-    </ul>
-    @endforeach
-</body>
-</html>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nom de la salle</th>
+                <th>Adresse</th>
+                <th>Nombre de places</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($salle as $salles)
+            <tr>
+                <td>{{$salles->nom}}</td>
+                <td>{{$salles->adresse}}</td>
+                <td>{{$salles->place}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection

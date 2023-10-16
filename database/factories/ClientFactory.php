@@ -20,7 +20,6 @@ class ClientFactory extends Factory
             'nom'=> $this->faker->lastName(),
             'prenom'=> $this->faker->firstName(),
             'email'=> $this->faker->email(),
-
         ];
     }
 }

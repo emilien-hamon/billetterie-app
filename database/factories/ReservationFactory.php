@@ -18,14 +18,14 @@ class ReservationFactory extends Factory
      */
     public function definition(): array
     {
+        $salle = Salle::inRandomOrder()->first();
+        $client = Client::inRandomOrder()->first();
         return [
-            'numero'=> $this->faker->numberBetween(1, 100),
-            'date'=> $this->faker->date(),
-            'heure'=> $this->faker->numberBetween(0, 24),
+            'date_reservation'=> $this->faker->date(),
             'prix'=> $this->faker->numberBetween(70, 150),
-            'place'=> $this->faker->numberBetween(30, 50),
-            //'salle_id' => Salle::factory()->create(),
-            //'client_id' => Client::factory()->create(),
+            'place_reservation'=> $this->faker->numberBetween(30, 50),
+            'salle_id' => $salle->id,
+            'id_reservation' => $client->id,
         ];
     }
 }

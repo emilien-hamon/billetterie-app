@@ -10,11 +10,13 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private $repository;
     public function index()
     {
         $client = Client::all();
 
         return view('client.client', compact('client'));
+
     }
 
     /**
@@ -22,7 +24,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.create');
     }
 
     /**
@@ -30,7 +32,15 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client;
+
+        $client->nom = $request->nom;
+        $client->prenom = $request->prenom;
+        $client->email = $request->email;
+
+        $client->save();
+
+        return redirect()->route('client.index');
     }
 
     /**
@@ -38,7 +48,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('client.show', compact('client'));
     }
 
     /**
@@ -46,15 +56,21 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('client.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, string $id)
     {
-        $this->repository->update($client, $request->all());
+        $client = Client::find($id);
+
+        $client->nom = $request->nom;
+        $client->prenom = $request->prenom;
+        $client->email = $request->email;
+
+        $client->save();
 
         return redirect()->route('client.index');
     }
@@ -64,6 +80,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('client.index');
     }
 }
