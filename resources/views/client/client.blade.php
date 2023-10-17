@@ -1,14 +1,14 @@
 @extends('layout.header')
 @section('content')
     <div class="container">
-        <h2>Liste des clients :</h2>
+        <h2>{{ __('Liste des clients :') }}</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th>{{ __('Nom') }}</th>
+                    <th>{{ __('Prénom') }}</th>
+                    <th>{{ __('Email') }}</th>
+                    <th>{{ __('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,14 +19,14 @@
                         <td>{{ $clients->email }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('client.show', ['client' => $clients->id]) }}" class="btn btn-warning rounded">Voir</a>
+                                <a href="{{ route('client.show', ['client' => $clients->id]) }}" class="btn btn-warning rounded">{{ __('Voir') }}</a>
                                 <span class="mx-1"></span>
-                                <a href="{{ route('client.edit', ['client' => $clients->id]) }}" class="btn btn-warning rounded">Modifier</a>
+                                <a href="{{ route('client.edit', ['client' => $clients->id]) }}" class="btn btn-warning rounded">{{ __('Modifier') }}</a>
                                 <span class="mx-1"></span>
                                 <form method="POST" action="{{ route('client.destroy', ['client' => $clients->id]) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button type="submit" class="btn btn-danger rounded delete-user">Supprimer</button>
+                                    <button type="submit" class="btn btn-danger rounded delete-user">{{ __('Supprimer') }}</button>
                                 </form>
                             </div>
                         </td>
@@ -35,7 +35,7 @@
             </tbody>
         </table>
         <div class="text-center">
-            <a href="{{ route('client.create') }}" class="btn btn-warning">Ajouter un nouveau client</a>
+            <a href="{{ route('client.create') }}" class="btn btn-warning">{{ __('Ajouter un nouveau client') }}</a>
         </div>
     </div>
 @endsection
