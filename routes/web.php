@@ -29,9 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ...
 });
 
-// Autres routes non protégées
-Route::get('/login', 'Auth\LoginController@index'); // Route de connexion
-// Autres routes publiques
+Route::get('/login', 'Auth\LoginController@index');
 
 
 Route::get('/', function () {
