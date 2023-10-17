@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\ReservationRepository;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Client;
 use App\Models\Reservation;
 use App\Models\Salle;
@@ -42,7 +43,7 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         $this->repository->store($request);
         return redirect()->route('reservation.index');
@@ -76,7 +77,7 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
         $this->repository->update($request, $reservation);
         return redirect()->route('reservation.index');

@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
 class SetLocale {
-    public function handle($request, Closure $next) {
-        if (session('locale') !== null) {
-            App::setLocale(Session::get('locale'));
-        } else {
-            App::setLocale(Config::get('app.locale'));
+    public function handle($request, Closure $next)
+    {
+        if(session()->has('locale')) {
+            app()->setLocale(session('locale'));
+            app()->setLocale(config('app.locale'));
         }
-    return $next($request);
-    }
-}
+
+        return $next($request);
+    }}
 
 ?>

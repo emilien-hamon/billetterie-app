@@ -39,7 +39,6 @@
                         <option value="en" @if (session('locale')== 'en')selected @endif> {{__('EN')}}</option>
                     </select>
                 </form>
-
                 <div class="font-medium text-base text-primary me-4 mt-2">
                     Bonjour {{ Auth::user()->name }} !
                 </div>
@@ -61,6 +60,11 @@
 
     </nav>
     @yield('content')
+    <script>
+        document.getElementById('language').addEventListener('change', function() {
+            document.getElementById('languageForm').submit();
+        });
+    </script>
 </body>
 
 </html>

@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +183,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // 'Session' => Illuminate\Support\Facades\Session::class,
+        // 'Lang' => Illuminate\Support\Facades\Lang::class,
     ])->toArray(),
 
 ];

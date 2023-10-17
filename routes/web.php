@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SalleController;
@@ -46,9 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->middleware(['auth', 'verified'])->name('change.language');
-
-
-
+Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->name('change.language');
 
 require __DIR__.'/auth.php';

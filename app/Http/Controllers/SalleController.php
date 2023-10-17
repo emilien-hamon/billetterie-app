@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\SalleRepository;
+use App\Http\Requests\SalleRequest;
 use App\Models\Salle;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class SalleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SalleRequest $request)
     {
         $this->repository->store($request);
         return redirect()->route('salle.index');
@@ -58,7 +59,7 @@ class SalleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Salle $salle)
+    public function update(SalleRequest $request, Salle $salle)
     {
         $this->repository->update($request, $salle);
         return redirect()->route('salle.index');

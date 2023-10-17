@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\ClientRepository;
+use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         $this->repository->store($request);
         return redirect()->route('client.index');
@@ -60,7 +61,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientRequest $request, Client $client)
     {
         $this->repository->update($request, $client);
         return redirect()->route('client.index');
