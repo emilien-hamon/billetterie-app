@@ -11,7 +11,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand m-1" href="http://billetterie.test"> 🎭 Accueil</a>
+        <a class="navbar-brand m-1" href="http://billetterie.test/dashboard"> 🎭 Accueil</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,25 @@
                 </li>
             </ul>
         </div>
+        <div class="me-3 space-y-1">
+            <div class="d-flex">
+                <!--<x-responsive-nav-link :href="route('profile.edit')" class="btn btn-primary me-2">
+                    {{ __('Profil') }}
+                </x-responsive-nav-link>
+-->
+                <form method="POST" action="{{ route('logout') }}" class="me-2">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="btn btn-danger"
+                    >
+                        {{ __('Déconnexion') }}
+                    </x-responsive-nav-link>
+                </form>
+            </div>
+        </div>
+
     </nav>
     @yield('content')
 </body>
