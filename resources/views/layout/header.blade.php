@@ -31,6 +31,15 @@
         </div>
         <div class="me-3 space-y-1">
             <div class="d-flex">
+
+                <form action="{{ route('change.language') }}" method="post" id="languageForm" class="me-2 mt-2">
+                    @csrf
+                    <select name="language" id="language" class="form-select form-select-sm">
+                        <option value="fr" @if (session('locale')== 'fr')selected @endif> {{__('FR')}}</option>
+                        <option value="en" @if (session('locale')== 'en')selected @endif> {{__('EN')}}</option>
+                    </select>
+                </form>
+
                 <div class="font-medium text-base text-primary me-4 mt-2">
                     Bonjour {{ Auth::user()->name }} !
                 </div>

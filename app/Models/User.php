@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Bouncer;
 
 class User extends Authenticatable
 {
+    use HasRolesAndAbilities;
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
