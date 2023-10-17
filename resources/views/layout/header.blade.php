@@ -31,17 +31,19 @@
         </div>
         <div class="me-3 space-y-1">
             <div class="d-flex">
-                <!--<x-responsive-nav-link :href="route('profile.edit')" class="btn btn-primary me-2">
+                <div class="font-medium text-base text-primary me-4 mt-2">
+                    Bonjour {{ Auth::user()->name }} !
+                </div>
+                <x-responsive-nav-link :href="route('profile.edit')" class="btn btn-primary me-2">
                     {{ __('Profil') }}
                 </x-responsive-nav-link>
--->
+
+
                 <form method="POST" action="{{ route('logout') }}" class="me-2">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault(); this.closest('form').submit();"
-                        class="btn btn-danger"
-                    >
+                        onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
                         {{ __('Déconnexion') }}
                     </x-responsive-nav-link>
                 </form>
