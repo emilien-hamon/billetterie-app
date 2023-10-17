@@ -18,6 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('salle', SalleController::class);
+
+    Route::resource('client', ClientController::class);
+
+    Route::resource('reservation', ReservationController::class);
+    Route::get('/dashboard', 'DashboardController@index');
+    // ...
+});
+
+// Autres routes non protégées
+Route::get('/login', 'Auth\LoginController@index'); // Route de connexion
+// Autres routes publiques
+
+
 Route::get('/', function () {
     return view('auth.register');
 });
@@ -32,13 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/accueil', [AccueilController::class, 'index']);
 
-Route::resource('salle', SalleController::class);
-
-Route::resource('client', ClientController::class);
-
-Route::resource('reservation', ReservationController::class);
 
 
 require __DIR__.'/auth.php';
