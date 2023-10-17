@@ -1,18 +1,17 @@
 @extends('layout.header')
-
 @section('content')
 <div class="container">
-    <h2>Liste des réservations :</h2>
+    <h2>{{ __('Liste des réservations :') }}</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Réservation n°</th>
-                <th>Date</th>
-                <th>Prix</th>
-                <th>Nombre de places</th>
-                <th>Nom du client</th>
-                <th>Nom de la salle</th>
-                <th>Actions</th>
+                <th>{{ __('Réservation n°') }}</th>
+                <th>{{ __('Date') }}</th>
+                <th>{{ __('Prix') }}</th>
+                <th>{{ __('Nombre de places') }}</th>
+                <th>{{ __('Nom du client') }}</th>
+                <th>{{ __('Nom de la salle') }}</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -38,14 +37,14 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ route('reservation.show', ['reservation' => $reservations->id]) }}" class="btn btn-warning rounded">Voir</a>
+                        <a href="{{ route('reservation.show', ['reservation' => $reservations->id]) }}" class="btn btn-warning rounded">{{ __('Voir') }}</a>
                         <span class="mx-1"></span>
-                        <a href="{{ route('reservation.edit', ['reservation' => $reservations->id]) }}" class="btn btn-warning rounded">Modifier</a>
+                        <a href="{{ route('reservation.edit', ['reservation' => $reservations->id]) }}" class="btn btn-warning rounded">{{ __('Modifier') }}</a>
                         <span class="mx-1"></span>
                         <form method="POST" action="{{ route('reservation.destroy', ['reservation' => $reservations->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger rounded delete-user">Supprimer</button>
+                            <button type="submit" class="btn btn-danger rounded delete-user">{{ __('Supprimer') }}</button>
                         </form>
                     </div>
                 </td>
@@ -54,7 +53,7 @@
         </tbody>
     </table>
     <div class="text-center">
-        <a href="{{ route('reservation.create') }}" class="btn btn-warning">Ajouter une nouvelle réservation</a>
+        <a href="{{ route('reservation.create') }}" class="btn btn-warning">{{ __('Ajouter une nouvelle réservation') }}</a>
     </div>
 </div>
 @endsection
