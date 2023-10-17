@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ClientRepository;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    private $repository;
+    public function __construct(ClientRepository $repository) {
+        $this->repository=$repository;
+    }
     /**
      * Display a listing of the resource.
      */
-    private $repository;
+
     public function index()
     {
         $client = Client::all();
@@ -32,14 +37,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Client;
-
-        $client->nom = $request->nom;
-        $client->prenom = $request->prenom;
-        $client->email = $request->email;
-
-        $client->save();
-
+        $this->repository->store($request);
         return redirect()->route('client.index');
     }
 
@@ -64,12 +62,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $client->nom = $request->nom;
-        $client->prenom = $request->prenom;
-        $client->email = $request->email;
-
-        $client->save();
-
+        $this->repository->update($request, $client);
         return redirect()->route('client.index');
     }
 

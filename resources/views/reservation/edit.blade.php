@@ -18,6 +18,7 @@
                 <select class="form-control" name="id_reservation" id="id_reservation">
                     <option selected value="{{ old('id', $reservation->id_reservation) }}">
                         @foreach ($client as $clients)
+
                             @if ($reservation->id_reservation == $clients->id)
                             {{$clients->nom}}
                             @endif
@@ -50,7 +51,7 @@
 
             <div class="form-group">
                 <label for="id_salle" class="text-black">Nom et ID de la salle</label>
-                <select class="form-control" name="id_salle" id="id_salle">
+                <select class="form-control" name="salle_id" id="salle_id">
                     <option selected value="{{ old('id', $reservation->id_reservation) }}">
                         @foreach ($salle as $salles)
                             @if ($reservation->salle_id == $salles->id)

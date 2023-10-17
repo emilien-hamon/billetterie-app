@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ReservationRepository;
 use App\Models\Client;
 use App\Models\Reservation;
 use App\Models\Salle;
@@ -9,12 +10,17 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+    private $repository;
+    public function __construct(ReservationRepository $repository) {
+        $this->repository=$repository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $client = Client::all();
+
         $salle = Salle::all();
         $reservation = Reservation::all();
         return view('reservation.reservation', compact('reservation','client','salle'));
@@ -38,17 +44,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $reservation = new Reservation;
-
-        $reservation->numero = $request->numero;
-        $reservation->id_reservation = $request->id_reservation;
-        $reservation->date_reservation = $request->date_reservation;
-        $reservation->place_reservation = $request->place_reservation;
-        $reservation->prix = $request->prix;
-        $reservation->salle_id = $request->salle_id;
-
-        $reservation->save();
-
+        $this->repository->store($request);
         return redirect()->route('reservation.index');
     }
 
@@ -68,9 +64,12 @@ class ReservationController extends Controller
      */
     public function edit(String $id)
     {
-        $client = Client::Find($id);
-        $salle = Salle::Find($id);
-        $reservation = Salle::Find($id);
+
+        $client = Client::all();
+        $salle = Salle::all();
+
+        $reservation = Reservation::Find($id);
+
         return view('reservation.edit', compact('reservation','client','salle'));
     }
 
@@ -79,15 +78,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        $reservation->numero = $request->numero;
-        $reservation->id_reservation = $request->id_reservation;
-        $reservation->date_reservation = $request->date_reservation;
-        $reservation->place_reservation = $request->place_reservation;
-        $reservation->prix = $request->prix;
-        $reservation->salle_id = $request->salle_id;
-
-        $reservation->save();
-
+        $this->repository->update($request, $reservation);
         return redirect()->route('reservation.index');
     }
 
