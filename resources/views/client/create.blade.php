@@ -8,11 +8,12 @@
 
         <div class="form-group">
             <label for="nom" class="text-white">{{ __('Nom') }}</label>
-            <input type="text" name="nom" id="nom" class="form-control" required maxlength="75" placeholder="{{ __('Nom') }}">
+            <x-input-text property="nom" required maxlength="75" placeholder="{{ __('Nom') }}"/>
+
         </div>
 
         <div class="form-group">
-            <label for "prenom" class="text-white">{{ __('Prénom') }}</label>
+            <label for="prenom" class="text-white">{{ __('Prénom') }}</label>
             <input type="text" name="prenom" id="prenom" class="form-control" required maxlength="75" placeholder="{{ __('Prénom') }}">
         </div>
 

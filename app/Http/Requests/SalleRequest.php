@@ -22,8 +22,8 @@ class SalleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required',
-            'adresse' => 'required',
+            'nom' => 'required|string',
+            'adresse' => 'required|string',
             'place' => 'required|integer',
         ];
     }

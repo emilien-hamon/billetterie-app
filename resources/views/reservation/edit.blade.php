@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <label for="place_reservation" class="text-black">{{ __('Nombre de places réservées') }}</label>
-            <input type="number" name "place_reservation" id="place_reservation" class="form-control" required
+            <input type="number" name="place_reservation" id="place_reservation" class="form-control" required
                 maxlength="75" placeholder="{{ __('Nombre de places réservées') }}" value="{{ old('place_reservation', $reservation->place_reservation) }}">
         </div>
 

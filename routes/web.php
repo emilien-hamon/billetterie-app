@@ -37,6 +37,10 @@ Route::get('/', function () {
     return view('auth.register');
 });
 
+#Route::get('/mail', function () {
+#    return view('emails.mail');
+#});
+
 Route::get('/dashboard', function () {
     return view('accueil');
 })->middleware(['auth', 'verified'])->name('accueil');

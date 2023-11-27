@@ -2,6 +2,14 @@
 
 return [
 
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'emilienhamon@outlook.com'),
+        'name' => env('MAIL_FROM_NAME', 'Emilien'),
+
+    ],
+    // 'reply_to' => ['address' => 'emilienhamon@outlook.com', 'Emilien' => 'Billetterie'],
+    'reply_to' => ['address' => 'emilienhamon@outlook.com', 'name' => 'Billetterie'],
+
     /*
     |--------------------------------------------------------------------------
     | Default Mailer

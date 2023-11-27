@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\ClientRepository;
 use App\Http\Requests\ClientRequest;
+use App\Mail\InfoClient;
+use App\Mail\InfoMail;
 use App\Models\Client;
 use Illuminate\Http\Request;
-
+use Mail;
+use Auth;
 class ClientController extends Controller
 {
     private $repository;
-    public function __construct(ClientRepository $repository) {
-        $this->repository=$repository;
+    public function __construct(ClientRepository $repository)
+    {
+        $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
@@ -39,7 +43,10 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
         $this->repository->store($request);
+
+
         return redirect()->route('client.index');
+
     }
 
     /**
@@ -55,6 +62,8 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+
+
         return view('client.edit', compact('client'));
     }
 
@@ -63,7 +72,11 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
+
         $this->repository->update($request, $client);
+
+        Mail::to('test@test.fr')->send(new InfoMail($client));
+
         return redirect()->route('client.index');
     }
 
