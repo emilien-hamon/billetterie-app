@@ -7,18 +7,21 @@
         @method('post')
 
         <div class="form-group">
+            <br>
             <label for="nom" class="text-white">{{ __('Nom') }}</label>
-            <input type="text" name="nom" id="nom" class="form-control" required maxlength="75" placeholder="{{ __('Nom') }}">
+            <x-input-text property="nom" required maxlength="75"/>
         </div>
 
         <div class="form-group">
+            <br>
             <label for="adresse" class="text-white">{{ __('Adresse') }}</label>
-            <input type="text" name="adresse" id="adresse" class="form-control" required maxlength="75" placeholder="{{ __('Adresse') }}">
+            <x-input-text property="adresse" required maxlength="75"/>
         </div>
 
         <div class="form-group">
+            <br>
             <label for="place" class="text-white">{{ __('Nombre de places') }}</label>
-            <input type="number" name="place" id="place" class="form-control" required maxlength="75" placeholder="{{ __('Nombre de place') }}">
+            <x-input-number property="place" required maxlength="75"/>
         </div>
 
         <div class="mt-4">

@@ -7,19 +7,22 @@
         @method('put')
 
         <div class="form-group">
-            <label for="nom" class="text-white">{{ __('Nom') }}</label>
-            <input placeholder="{{__('Nom')}}" type="text" name="nom" id="nom" class="form-control" required maxlength="75" value="{{ old('nom', $client->nom) }}">
+            <br>
+            <label for="nom">{{ __('Nom') }}</label>
+            <x-input-text property="nom" required maxlength="75" :entity="$client"/>
         </div>
 
         <div class="form-group">
-            <label for="prenom" class="text-white">{{ __('Prénom') }}</label>
-            <input placeholder="{{__('Prénom')}}" type="text" name="prenom" id="prenom" class="form-control" required maxlength="75" value="{{ old('prenom', $client->prenom) }}">
-        </div>
+            <br>
+            <label for="prenom">{{ __('Prénom') }}</label>
+            <x-input-text property="prenom" required maxlength="75" :entity="$client"/>
+            </div>
 
         <div class="form-group">
-            <label for="email" class="text-white">{{ __('Email') }}</label>
-            <input placeholder="{{__('Email')}}" type="email" name="email" id="email" class="form-control" required value="{{ old('email', $client->email) }}">
-        </div>
+            <br>
+            <label for="email">{{ __('Email') }}</label>
+            <x-input-text property="email" required maxlength="75" :entity="$client"/>
+            </div>
 
         <div class="mt-4">
             <button type="submit" class="btn btn-success">{{ __('Valider') }}</button>

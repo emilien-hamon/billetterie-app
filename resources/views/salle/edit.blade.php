@@ -7,18 +7,21 @@
         @method('put')
 
         <div class="form-group">
-            <label for="nom" class="text-white">{{ __('Nom') }}</label>
-            <input placeholder="{{__('Nom')}}" type="text" name="nom" id="nom" class="form-control" required maxlength="75" value="{{ old('nom', $salle->nom) }}">
+            <br>
+            <label for="nom">{{ __('Nom') }}</label>
+            <x-input-text property="nom" required maxlength="75" :entity="$salle"/>
         </div>
 
         <div class="form-group">
-            <label for="adresse" class="text-white">{{ __('Adresse') }}</label>
-            <input placeholder="{{__('Adresse')}}" type="text" name="adresse" id="adresse" class="form-control" placeholder="{{ __('Adresse') }}" required maxlength="75" value="{{ old('adresse', $salle->adresse) }}">
+            <br>
+            <label for="adresse">{{ __('Adresse') }}</label>
+            <x-input-text property="adresse" required maxlength="75" :entity="$salle"/>
         </div>
 
         <div class="form-group">
-            <label for="place" class="text-white">{{ __('Nombre de places') }}</label>
-            <input placeholder="{{__('Nombre de place')}}" type="number" name="place" id="place" class="form-control" placeholder="{{ __('Nombre de place') }}" required value="{{ old('place', $salle->place) }}">
+            <br>
+            <label for="place">{{ __('Nombre de places') }}</label>
+            <x-input-number property="place" required maxlength="7" :entity="$salle"/>
         </div>
 
         <div class="mt-4">

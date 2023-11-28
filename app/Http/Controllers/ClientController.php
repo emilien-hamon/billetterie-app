@@ -75,7 +75,7 @@ class ClientController extends Controller
 
         $this->repository->update($request, $client);
 
-        Mail::to('test@test.fr')->send(new InfoMail($client));
+        Mail::to('contact@billetterie.fr')->send(new InfoMail($client));
 
         return redirect()->route('client.index');
     }
