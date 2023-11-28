@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccueilController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,38 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::resource('salle', SalleController::class);
-
-    Route::resource('client', ClientController::class);
-
-    Route::resource('reservation', ReservationController::class);
-    Route::get('/dashboard', 'DashboardController@index');
-    // ...
-});
-
-Route::get('/login', 'Auth\LoginController@index');
-
-
 Route::get('/', function () {
-    return view('auth.register');
+    return view('welcome');
 });
-
-#Route::get('/mail', function () {
-#    return view('emails.mail');
-#});
 
 Route::get('/dashboard', function () {
-    return view('accueil');
-})->middleware(['auth', 'verified'])->name('accueil');
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->name('change.language');
 
 require __DIR__.'/auth.php';
