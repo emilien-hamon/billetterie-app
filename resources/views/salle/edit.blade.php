@@ -25,7 +25,7 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">{{ __('Valider') }}</button>
+            <x-submit-button/>
         </div>
     </form>
 </div>

@@ -19,7 +19,7 @@
                     <p class="card-text">{{ __('Id du client') }} : {{$reservation->id_reservation}}</p>
                     <p class="card-text">{{ __('Nombre de place') }} : {{$reservation->place_reservation}} {{ __('personnes') }}</p>
                     <p class="card-text">{{ __('Date') }} : {{$reservation->date_reservation}}</p>
-                    <p class="card-text">{{ __('Prix') }} : {{$reservation->Prix}} {{ __('personnes') }}</p>
+                    <p class="card-text">{{ __('Prix') }} : {{$reservation->prix}} {{('€')}}</p>
                 </div>
             </div>
         </div>

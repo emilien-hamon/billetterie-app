@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label for="date_reservation" class="text-black">{{ __('Date de l\'événement') }}</label>
-            <input type="date" name="date_reservation" id="date_reservation" class="form-control" required maxlength="75">
+            <x-input-date property="date_reservation" required maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">
@@ -45,7 +45,7 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">{{ __('Valider') }}</button>
+            <x-submit-button/>
         </div>
     </form>
 </div>
