@@ -8,8 +8,7 @@
 
         <div class="form-group">
             <label for="numero" class="text-black">{{ __('Numéro') }}</label>
-            <input type="text" name="numero" id="numero" class="form-control" required maxlength="75"
-                placeholder="{{ __('Numéro') }}" value="{{ old('numero', $reservation->numero) }}">
+            <x-input-text property="numero" maxlength="75" :entity="$reservation"/>
         </div>
 
         <div class="form-group">
@@ -33,19 +32,17 @@
         <div class="form-group">
             <label for="date_reservation" class="text-black">{{ __('Date de l\'événement') }}</label>
             <input type="date" name="date_reservation" id="date_reservation" class="form-control" required
-                maxlength="75" placeholder="{{ __('Date de l\'événement') }}" value="{{ old('date_reservation', $reservation->date_reservation) }}">
+                maxlength="75" value="{{ old('date_reservation', $reservation->date_reservation) }}">
         </div>
 
         <div class="form-group">
             <label for="place_reservation" class="text-black">{{ __('Nombre de places réservées') }}</label>
-            <input type="number" name="place_reservation" id="place_reservation" class="form-control" required
-                maxlength="75" placeholder="{{ __('Nombre de places réservées') }}" value="{{ old('place_reservation', $reservation->place_reservation) }}">
+            <x-input-number property="place_reservation" maxlength="75" :entity="$reservation"/>
         </div>
 
         <div class="form-group">
             <label for="prix" class="text-black">{{ __('Prix') }}</label>
-            <input type="number" name="prix" id="prix" class="form-control" required maxlength="75"
-                placeholder="{{ __('Prix') }}" value="{{old('prix', $reservation->prix) }}">
+            <x-input-number property="prix" maxlength="75" :entity="$reservation"/>
         </div>
 
         <div class="form-group">

@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="numero" class="text-black">{{ __('Numéro') }}</label>
-            <input type="text" name="numero" id="numero" class="form-control" required maxlength="75" placeholder="{{ __('Numéro') }}">
+            <x-input-text property="numero" maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">
@@ -22,17 +22,17 @@
 
         <div class="form-group">
             <label for="date_reservation" class="text-black">{{ __('Date de l\'événement') }}</label>
-            <input type="date" name="date_reservation" id="date_reservation" class="form-control" required maxlength="75" placeholder="{{ __('Date de l\'événement') }}">
+            <input type="date" name="date_reservation" id="date_reservation" class="form-control" required maxlength="75">
         </div>
 
         <div class="form-group">
             <label for="place_reservation" class="text-black">{{ __('Nombre de places réservées') }}</label>
-            <input type="number" name="place_reservation" id="place_reservation" class="form-control" required maxlength="75" placeholder="{{ __('Nombre de places réservées') }}">
+            <x-input-number property="place_reservation" maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">
             <label for="prix" class="text-black">{{ __('Prix') }}</label>
-            <input type="number" name="prix" id="prix" class="form-control" required maxlength="75" placeholder="{{ __('Prix') }}">
+            <x-input-number property="prix" maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">

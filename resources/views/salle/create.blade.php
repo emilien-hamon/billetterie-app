@@ -8,20 +8,20 @@
 
         <div class="form-group">
             <br>
-            <label for="nom" class="text-white">{{ __('Nom') }}</label>
-            <x-input-text property="nom" maxlength="75"/>
+            <label for="nom">{{ __('Nom') }}</label>
+            <x-input-text property="nom" maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">
             <br>
-            <label for="adresse" class="text-white">{{ __('Adresse') }}</label>
-            <x-input-text property="adresse" maxlength="75"/>
+            <label for="adresse">{{ __('Adresse') }}</label>
+            <x-input-text property="adresse" maxlength="75" :entity="null"/>
         </div>
 
         <div class="form-group">
             <br>
-            <label for="place" class="text-white">{{ __('Nombre de places') }}</label>
-            <x-input-number property="place" maxlength="75"/>
+            <label for="place">{{ __('Nombre de places') }}</label>
+            <x-input-number property="place" maxlength="75" :entity="null"/>
         </div>
 
         <div class="mt-4">

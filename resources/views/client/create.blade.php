@@ -1,7 +1,7 @@
 @extends('layout.header')
 @section('content')
 <div class="container py-4">
-    <h2 >{{ __('Création - Client') }}</h2>
+    <h2>{{ __('Création - Client') }}</h2>
     <form action="{{ route('client.store') }}" method="post">
         @csrf
         @method('post')
@@ -9,19 +9,19 @@
         <div class="form-group">
             <br>
             <label for="nom">{{ __('Nom') }}</label>
-            <x-input-text property="nom" required maxlength="75"/>
+            <x-input-text property="nom" maxlength="75" :entity="null" />
         </div>
 
         <div class="form-group">
             <br>
-            <label for="nom">{{ __('Prénom') }}</label>
-            <x-input-text property="prenom" required maxlength="75"/>
+            <label for="prenom">{{ __('Prénom') }}</label>
+            <x-input-text property="prenom" maxlength="75" :entity="null" />
         </div>
 
         <div class="form-group">
             <br>
-            <label for="nom">{{ __('E-Mail') }}</label>
-            <x-input-email property="email" required maxlength="75"/>
+            <label for="email">{{ __('E-Mail') }}</label>
+            <x-input-email property="email" maxlength="75" :entity="null" />
         </div>
 
         <div class="mt-4">
