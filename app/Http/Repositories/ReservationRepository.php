@@ -17,6 +17,8 @@ class ReservationRepository
         $reservation->salle_id = $request->salle_id;
 
         $reservation->save();
+
+        return $reservation;
     }
 
     public function update( $request,  $reservation)

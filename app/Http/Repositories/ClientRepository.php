@@ -14,7 +14,10 @@ class ClientRepository
         $client->email = $request->email;
 
         $client->save();
+
+        return $client;
     }
+
 
     public function update($request, $client)
     {

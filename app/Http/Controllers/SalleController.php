@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\SalleRepository;
 use App\Http\Requests\SalleRequest;
+use App\Mail\InfoMail;
 use App\Models\Salle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class SalleController extends Controller
 {
     private $repository;
-    public function __construct(SalleRepository $repository) {
-        $this->repository=$repository;
+
+    public function __construct(SalleRepository $repository)
+    {
+        $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,7 +42,10 @@ class SalleController extends Controller
      */
     public function store(SalleRequest $request)
     {
-        $this->repository->store($request);
+        $salle = $this->repository->store($request);
+
+        $this->sendInfoMail($salle, 'created');
+
         return redirect()->route('salle.index');
     }
 
@@ -62,6 +71,9 @@ class SalleController extends Controller
     public function update(SalleRequest $request, Salle $salle)
     {
         $this->repository->update($request, $salle);
+
+        $this->sendInfoMail($salle, 'updated');
+
         return redirect()->route('salle.index');
     }
 
@@ -71,6 +83,14 @@ class SalleController extends Controller
     public function destroy(Salle $salle)
     {
         $salle->delete();
+
+        $this->sendInfoMail($salle, 'deleted');
+
         return redirect()->route('salle.index');
+    }
+
+    private function sendInfoMail(Salle $salle, $action)
+    {
+        Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $salle, $action));
     }
 }

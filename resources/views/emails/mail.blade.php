@@ -1,1 +1,1 @@
-<p>Bonjour {{Auth::user()->name}}</p>
+<p>Bonjour</p>

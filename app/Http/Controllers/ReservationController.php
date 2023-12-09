@@ -1,32 +1,35 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\ReservationRepository;
 use App\Http\Requests\ReservationRequest;
+use App\Mail\InfoMail;
 use App\Models\Client;
 use App\Models\Reservation;
 use App\Models\Salle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
     private $repository;
-    public function __construct(ReservationRepository $repository) {
-        $this->repository=$repository;
+
+    public function __construct(ReservationRepository $repository)
+    {
+        $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $client = Client::all();
-
         $salle = Salle::all();
         $reservation = Reservation::all();
-        return view('reservation.reservation', compact('reservation','client','salle'));
 
-
+        return view('reservation.reservation', compact('reservation', 'client', 'salle'));
     }
 
     /**
@@ -37,7 +40,7 @@ class ReservationController extends Controller
         $salle = Salle::all();
         $client = Client::all();
 
-        return view('reservation.create',compact('client','salle'));
+        return view('reservation.create', compact('client', 'salle'));
     }
 
     /**
@@ -45,7 +48,10 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
-        $this->repository->store($request);
+        $reservation = $this->repository->store($request);
+
+        $this->sendInfoMail($reservation, 'created');
+
         return redirect()->route('reservation.index');
     }
 
@@ -57,7 +63,7 @@ class ReservationController extends Controller
         $client = Client::all();
         $salle = Salle::all();
 
-        return view('reservation.show', compact('reservation','client','salle'));
+        return view('reservation.show', compact('reservation', 'client', 'salle'));
     }
 
     /**
@@ -65,13 +71,12 @@ class ReservationController extends Controller
      */
     public function edit(String $id)
     {
-
         $client = Client::all();
         $salle = Salle::all();
 
-        $reservation = Reservation::Find($id);
+        $reservation = Reservation::find($id);
 
-        return view('reservation.edit', compact('reservation','client','salle'));
+        return view('reservation.edit', compact('reservation', 'client', 'salle'));
     }
 
     /**
@@ -80,6 +85,9 @@ class ReservationController extends Controller
     public function update(ReservationRequest $request, Reservation $reservation)
     {
         $this->repository->update($request, $reservation);
+
+        $this->sendInfoMail($reservation, 'updated');
+
         return redirect()->route('reservation.index');
     }
 
@@ -89,6 +97,15 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
+
+        $this->sendInfoMail($reservation, 'deleted');
+
         return redirect()->route('reservation.index');
     }
+
+    private function sendInfoMail(Reservation $reservation, $action)
+    {
+        Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $reservation, $action));
+    }
 }
+

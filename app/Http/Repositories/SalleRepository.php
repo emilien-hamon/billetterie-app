@@ -15,7 +15,7 @@ class SalleRepository
 
         $salle->save();
 
-
+        return $salle;
     }
     public function update($request, $salle)
     {

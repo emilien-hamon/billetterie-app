@@ -41,14 +41,14 @@ class ClientController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ClientRequest $request)
-    {
-        $this->repository->store($request);
+{
+    $client = $this->repository->store($request);
+    $this->sendInfoMail($client, ['created']);
 
 
-        return redirect()->route('client.index');
+    return redirect()->route('client.index');
+}
 
-
-    }
 
     /**
      * Display the specified resource.
@@ -73,10 +73,9 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
-
         $this->repository->update($request, $client);
 
-        Mail::to('contact@billetterie.fr')->send(new InfoMail($client));
+        $this->sendInfoMail($client, ['updated']);
 
         return redirect()->route('client.index');
     }
@@ -87,6 +86,14 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $client->delete();
+
+        $this->sendInfoMail($client, ['deleted']);
+
         return redirect()->route('client.index');
+    }
+
+    private function sendInfoMail(Client $client, array $actions)
+    {
+        Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $client, $actions));
     }
 }
