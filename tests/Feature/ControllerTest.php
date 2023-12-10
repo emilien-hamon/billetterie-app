@@ -5,55 +5,57 @@ namespace Tests\Feature;
 
 use App\Http\Controllers\ClientController;
 use App\Http\Repositories\ClientRepository;
+use App\Mail\InfoMail;
 use App\Models\Client;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Http\Controllers\SalleController;
+use App\Http\Repositories\SalleRepository;
+use App\Http\Requests\SalleRequest;
+use App\Models\Salle;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Repositories\ReservationRepository;
+use App\Http\Requests\ReservationRequest;
+use App\Models\Reservation;
+use Illuminate\Http\Request;
+
 
 class ControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    /**
-     * Test if the index method returns a successful response.
-     */
+
     public function test_index_method_returns_successful_response(): void
     {
         $response = $this->get(route('client.index'));
         $response->assertStatus(200);
     }
 
-    /**
-     * Test if the create method returns a successful response.
-     */
     public function test_create_method_returns_successful_response(): void
     {
         $response = $this->get(route('client.create'));
         $response->assertStatus(200);
     }
 
-    /**
-     * Test if the store method creates a new client and redirects to the index.
-     */
     public function test_store_method_creates_new_client_and_redirects(): void
     {
         $data = [
-            // Provide valid data for client creation
+
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            // Add other required fields here
+
         ];
 
         $response = $this->post(route('client.store'), $data);
         $response->assertRedirect(route('client.index'));
 
-        // Add assertions to check if the client was created in the database
+
         $this->assertDatabaseHas('clients', $data);
     }
 
-    /**
-     * Test if the show method returns a successful response.
-     */
+
     public function test_show_method_returns_successful_response(): void
     {
         $client = factory(Client::class)->create();
@@ -61,27 +63,105 @@ class ControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // Add similar tests for other methods (edit, update, destroy) following the same pattern.
-
-    /**
-     * Test if the sendInfoMail method sends an email.
-     */
     public function test_send_info_mail_method_sends_email(): void
     {
-        // Mock the Mail facade
-        Mail::fake();
 
-        // Create a client (you may need to adjust this depending on your implementation)
+        Mail::fake();
         $client = factory(Client::class)->create();
 
-        // Call the sendInfoMail method
         $controller = new ClientController(new ClientRepository());
         $controller->sendInfoMail($client, ['created']);
 
-        // Assert that the mail was sent
         Mail::assertSent(InfoMail::class);
 
-        // You can add more assertions based on your specific implementation
     }
+
+    public function test_store_method_creates_new_salle_and_redirects(): void
+    {
+        $data = [
+            'name' => $this->faker->word,
+            // Add other required fields here
+        ];
+
+        $response = $this->post(route('salle.store'), $data);
+        $response->assertRedirect(route('salle.index'));
+
+        $this->assertDatabaseHas('salles', $data);
+    }
+
+    public function __construct(ReservationRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function index()
+    {
+        $client = Client::all();
+        $salle = Salle::all();
+        $reservation = Reservation::all();
+
+        return view('reservation.reservation', compact('reservation', 'client', 'salle'));
+    }
+
+    public function create()
+    {
+        $salle = Salle::all();
+        $client = Client::all();
+
+        return view('reservation.create', compact('client', 'salle'));
+    }
+
+    public function store(ReservationRequest $request)
+    {
+        $reservation = $this->repository->store($request);
+
+        $this->sendInfoMail($reservation, 'created');
+
+        return redirect()->route('reservation.index');
+    }
+
+    public function show(Reservation $reservation)
+    {
+        $client = Client::all();
+        $salle = Salle::all();
+
+        return view('reservation.show', compact('reservation', 'client', 'salle'));
+    }
+
+    public function edit(String $id)
+    {
+        $client = Client::all();
+        $salle = Salle::all();
+
+        $reservation = Reservation::find($id);
+
+        return view('reservation.edit', compact('reservation', 'client', 'salle'));
+    }
+
+    public function update(ReservationRequest $request, Reservation $reservation)
+    {
+        $this->repository->update($request, $reservation);
+
+        $this->sendInfoMail($reservation, 'updated');
+
+        return redirect()->route('reservation.index');
+    }
+
+    public function destroy(Reservation $reservation)
+    {
+        $reservation->delete();
+
+        $this->sendInfoMail($reservation, 'deleted');
+
+        return redirect()->route('reservation.index');
+    }
+
+    private function sendInfoMail(Reservation $reservation, $action)
+    {
+        Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $reservation, $action));
+    }
+
+
+
 }
 

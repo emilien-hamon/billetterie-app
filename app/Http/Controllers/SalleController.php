@@ -93,4 +93,5 @@ class SalleController extends Controller
     {
         Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $salle, $action));
     }
+
 }
