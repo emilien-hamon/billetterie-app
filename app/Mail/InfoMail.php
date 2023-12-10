@@ -28,14 +28,7 @@ class InfoMail extends Mailable
         $this->model = $model;
         $this->action = $action;
     }
-    /**
-     * Create a new message instance.
-     */
 
-
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
