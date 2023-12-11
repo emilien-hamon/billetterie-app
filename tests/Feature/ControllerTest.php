@@ -80,85 +80,12 @@ class ControllerTest extends TestCase
     {
         $data = [
             'name' => $this->faker->word,
-            // Add other required fields here
         ];
 
         $response = $this->post(route('salle.store'), $data);
         $response->assertRedirect(route('salle.index'));
 
         $this->assertDatabaseHas('salles', $data);
-    }
-
-    public function __construct(ReservationRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
-    public function index()
-    {
-        $client = Client::all();
-        $salle = Salle::all();
-        $reservation = Reservation::all();
-
-        return view('reservation.reservation', compact('reservation', 'client', 'salle'));
-    }
-
-    public function create()
-    {
-        $salle = Salle::all();
-        $client = Client::all();
-
-        return view('reservation.create', compact('client', 'salle'));
-    }
-
-    public function store(ReservationRequest $request)
-    {
-        $reservation = $this->repository->store($request);
-
-        $this->sendInfoMail($reservation, 'created');
-
-        return redirect()->route('reservation.index');
-    }
-
-    public function show(Reservation $reservation)
-    {
-        $client = Client::all();
-        $salle = Salle::all();
-
-        return view('reservation.show', compact('reservation', 'client', 'salle'));
-    }
-
-    public function edit(String $id)
-    {
-        $client = Client::all();
-        $salle = Salle::all();
-
-        $reservation = Reservation::find($id);
-
-        return view('reservation.edit', compact('reservation', 'client', 'salle'));
-    }
-
-    public function update(ReservationRequest $request, Reservation $reservation)
-    {
-        $this->repository->update($request, $reservation);
-
-        $this->sendInfoMail($reservation, 'updated');
-
-        return redirect()->route('reservation.index');
-    }
-
-    public function destroy(Reservation $reservation)
-    {
-        $reservation->delete();
-
-        $this->sendInfoMail($reservation, 'deleted');
-
-        return redirect()->route('reservation.index');
-    }
-
-    private function sendInfoMail(Reservation $reservation, $action)
-    {
-        Mail::to('contact@billetterie.fr')->send(new InfoMail(Auth::user(), $reservation, $action));
     }
 
 
